@@ -1,0 +1,139 @@
+/* Navegação: progresso, menu recolhível e anterior/próximo.
+   Cores seguem o que está por baixo (data-ui-top / data-ui-bottom no <html>). */
+
+html { --ui-top: var(--color-ink); --ui-top-bg: var(--color-bg); --ui-bottom: var(--color-ink); --ui-bottom-bg: var(--color-bg); }
+html[data-ui-top="dark"] { --ui-top: var(--color-on-dark); --ui-top-bg: var(--color-graphite); }
+html[data-ui-bottom="dark"] { --ui-bottom: var(--color-on-dark); --ui-bottom-bg: var(--color-graphite); }
+
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 50;
+  pointer-events: none;
+}
+.progress__fill {
+  display: block;
+  height: 100%;
+  background: var(--ui-top);
+  opacity: 0.7;
+  transform-origin: left center;
+  transform: scaleX(var(--progress, 0));
+}
+
+.menu {
+  position: fixed;
+  top: clamp(0.875rem, 2.4vh, 1.75rem);
+  right: var(--gutter-x);
+  z-index: 60;
+  color: var(--ui-top);
+  transition: color 300ms var(--ease);
+}
+.menu__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.72;
+  transition: opacity 200ms;
+}
+.menu__toggle:hover, .menu.is-open .menu__toggle, .menu__toggle:focus-visible { opacity: 1; }
+.menu__toggle-bars { display: inline-flex; flex-direction: column; gap: 5px; width: 18px; }
+.menu__toggle-bars i { display: block; height: 1px; background: currentColor; transition: transform 250ms var(--ease); }
+.menu.is-open .menu__toggle-bars i:first-child { transform: translateY(3px) rotate(45deg); }
+.menu.is-open .menu__toggle-bars i:last-child { transform: translateY(-3px) rotate(-45deg); }
+
+.menu__panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 15.5rem;
+  max-height: calc(100vh - 6rem);
+  overflow: auto;
+  padding: 0.75rem 0;
+  background: var(--ui-top-bg);
+  color: var(--ui-top);
+  border: 1px solid color-mix(in srgb, var(--ui-top) 18%, transparent);
+}
+.menu__list a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  color: inherit;
+  text-decoration: none;
+  font-size: 1rem;
+  line-height: 1.3;
+  opacity: 0.68;
+}
+.menu__list a::before { content: ""; width: 0.75rem; height: 1px; background: currentColor; opacity: 0; }
+.menu__list a:hover, .menu__list a:focus-visible { opacity: 1; }
+.menu__list a[aria-current="true"] { opacity: 1; }
+.menu__list a[aria-current="true"]::before { opacity: 1; }
+.menu__list a:focus-visible { outline-offset: -3px; }
+
+.menu__static {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.85rem 1.25rem 0.4rem;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+  background: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-align: left;
+  opacity: 0.8;
+}
+.menu__static:hover { opacity: 1; }
+.menu__static:disabled { cursor: default; opacity: 0.6; }
+.menu__static-box { width: 0.85rem; height: 0.85rem; border: 1px solid currentColor; display: inline-block; flex: none; }
+.menu__static[aria-pressed="true"] .menu__static-box { background: currentColor; box-shadow: inset 0 0 0 2px var(--ui-top-bg); }
+
+.ctrl-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 200ms, border-color 200ms;
+}
+.ctrl-btn:hover, .ctrl-btn:focus-visible { opacity: 1; border-color: currentColor; }
+
+.pager {
+  position: fixed;
+  right: var(--gutter-x);
+  bottom: clamp(0.875rem, 2.4vh, 1.75rem);
+  z-index: 55;
+  display: flex;
+  gap: 0.5rem;
+  color: var(--ui-bottom);
+  transition: color 300ms var(--ease);
+}
+.pager .ctrl-btn { background: color-mix(in srgb, var(--ui-bottom-bg) 70%, transparent); }
+
+@media (max-width: 767px) {
+  .pager { display: none; }
+  .menu { top: 0.75rem; }
+}
+
+@media (max-width: 767px) {
+  .menu { right: calc(var(--gutter-x) - 0.6rem); }
+  .menu__toggle { padding: 0.45rem 0.6rem; background: color-mix(in srgb, var(--ui-top-bg) 88%, transparent); opacity: 0.9; }
+}

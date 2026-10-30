@@ -1,0 +1,84 @@
+/* =============================================================
+   Tokens — Proposta Pedro Sousa · Pixel Rain Studio
+   Origem: proposta Lu Prates (index.html da raiz, que reaproveita
+   site/styles.css e site/STYLEGUIDE.md). Fontes copiadas para ./fonts.
+   Toda troca de cor/fonte/escala acontece aqui.
+   ============================================================= */
+
+@font-face {
+  font-family: "Rizoma";
+  src: url("../fonts/RizomaM-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rizoma";
+  src: url("../fonts/RizomaM-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rizoma";
+  src: url("../fonts/RizomaM-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("../fonts/Geist-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- cor (Lu Prates) ---- */
+  --color-bg: #f8f6f2;
+  --color-bg-alt: #f1eee6;
+  --color-ink: #201f1b;
+  --color-ink-secondary: #6f6a61;
+  --color-ink-tertiary: #a49e91;
+  --color-line: #dedacf;
+  --color-line-strong: #201f1b;
+
+  /* ---- derivados para esta proposta ---- */
+  --color-ink-muted: #8a8478;      /* itens inativos (≥3:1 sobre off, só texto grande) */
+  --color-graphite: #1c1b18;       /* fundo das viradas — grafite quente */
+  --color-on-dark: #f8f6f2;        /* off sobre grafite (≈17:1) */
+  --color-on-dark-secondary: #bdb7aa; /* ≈9:1 sobre grafite */
+  --color-on-dark-muted: #8a8478;  /* ≈4.9:1 sobre grafite */
+  --color-line-dark: #3a3832;
+
+  /* ---- famílias ---- */
+  --font-display: "Rizoma", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Geist", "Segoe UI", Arial, sans-serif;
+
+  /* ---- escala (vw E vh: cabe em 1366×768 e cresce até 1920×1080) ---- */
+  --fs-eyebrow: clamp(0.875rem, min(0.95vw, 1.7vh), 1.125rem);
+  --fs-support: clamp(1.125rem, min(1.45vw, 2.6vh), 1.75rem);
+  --fs-item: clamp(1.5rem, min(2.5vw, 4.45vh), 3rem);
+  --fs-title: clamp(2.25rem, min(4.2vw, 7.45vh), 5rem);
+  --fs-display: clamp(2.5rem, min(5.2vw, 9.25vh), 6.25rem);
+  --fs-numeral: clamp(4rem, min(10vw, 17.5vh), 12rem);
+  --fs-price: clamp(3.5rem, min(9vw, 16vh), 11rem);
+  --fs-price-alt: clamp(2.5rem, min(5.4vw, 9.6vh), 6.5rem);
+
+  /* ---- espaço ---- */
+  --gutter-x: clamp(1.25rem, 5vw, 6rem);
+  --gutter-top: clamp(4.5rem, 10.5vh, 7.5rem);
+  --gutter-bottom: clamp(4rem, 9vh, 6.5rem);
+  --gap-s: clamp(0.75rem, 1.6vh, 1.25rem);
+  --gap-m: clamp(1.25rem, 3.2vh, 2.5rem);
+  --gap-l: clamp(2rem, 6vh, 4.5rem);
+
+  /* ---- palco ---- */
+  --stage-step: 60vh;              /* rolagem por estado de leitura */
+
+  /* ---- motion ---- */
+  --ease: cubic-bezier(0.16, 0.84, 0.44, 1);
+  --dur-in: 420ms;
+  --rise: 14px;
+}
